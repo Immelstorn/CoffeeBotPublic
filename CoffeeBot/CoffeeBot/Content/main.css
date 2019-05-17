@@ -1,0 +1,8 @@
+﻿tr:hover,
+tr:hover input{
+    background-color: darkgray;
+}
+
+textarea {
+    resize: none;
+}

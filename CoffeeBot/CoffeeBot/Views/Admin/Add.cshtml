@@ -1,0 +1,40 @@
+﻿@model CoffeeBot.Models.Admin.AddViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Admin";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/main.js"></script>
+<link href="~/Content/main.css" rel="stylesheet" />
+
+@using (Html.BeginForm("AddPlace", "Admin", FormMethod.Post))
+{
+    @:<br />CityId @Html.TextBoxFor(m => m.CityId)
+    @:<br />Name @Html.TextBoxFor(m => m.Name)
+    @:<br />Lat @Html.TextBoxFor(m => m.Lat)
+    @:<br />Long @Html.TextBoxFor(m => m.Long)
+    @:<br />OpenTime @Html.TextBoxFor(m => m.OpenTime)
+    @:<br />CloseTime @Html.TextBoxFor(m => m.CloseTime)
+    @:<br />OpenTimeWeekend @Html.TextBoxFor(m => m.OpenTimeWeekend)
+    @:<br />CloseTimeWeekend @Html.TextBoxFor(m => m.CloseTimeWeekend)
+    @:<br />DescUa @Html.TextBoxFor(m => m.DescUa)
+    @:<br />DescRu @Html.TextBoxFor(m => m.DescRu)
+    @:<br />DescEn @Html.TextBoxFor(m => m.DescEn)
+    @:<br />AddressUa @Html.TextBoxFor(m => m.AddressUa)
+    @:<br />AddressRu @Html.TextBoxFor(m => m.AddressRu)
+    @:<br />AddressEn @Html.TextBoxFor(m => m.AddressEn)
+    @:<br />Active @Html.CheckBoxFor(m => m.Active)
+    @:<br />NonDairyMilk @Html.CheckBoxFor(m => m.NonDairyMilk)
+    @:<br />CoffeeToGo @Html.CheckBoxFor(m => m.CoffeeToGo)
+    @:<br />Kitchen @Html.CheckBoxFor(m => m.Kitchen)
+    @:<br />WiFi @Html.CheckBoxFor(m => m.WiFi)
+    @:<br />CoWorking @Html.CheckBoxFor(m => m.CoWorking)
+    @:<br />PetFriendly @Html.CheckBoxFor(m => m.PetFriendly)
+    @:<br />Restroom @Html.CheckBoxFor(m => m.Restroom)
+    @:<br />SaleOfCoffeeBeans @Html.CheckBoxFor(m => m.SaleOfCoffeeBeans)
+    @:<br />Alcohol @Html.CheckBoxFor(m => m.Alcohol)
+    <br />
+    <input type="submit" value="Save" />
+}

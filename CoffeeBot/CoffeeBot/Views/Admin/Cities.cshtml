@@ -1,0 +1,73 @@
+﻿@model System.Collections.Generic.List<CoffeeBot.Models.Admin.CityViewModel>
+
+@{
+    ViewBag.Title = "Cities";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/main.js"></script>
+<link href="~/Content/main.css" rel="stylesheet" />
+
+@using (Html.BeginForm("EditCities", "Admin", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name RU</th>
+            <th>Name UA</th>
+            <th>Name EN</th>
+            <th>Count</th>
+            <th>Country</th>
+            <th>Flag</th>
+            <th>List</th>
+        </tr>
+        @for (var i = 0; i < Model.Count; i++) {
+            @Html.HiddenFor(m => m[i].Id)
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Id, new {
+                        @readonly = "readonly",
+                        style = "width:30px"
+                    })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].NameRu, new {
+                        style = "width:100px"
+                    })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].NameUa, new {
+                        style = "width:100px"
+                    })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].NameEn, new {
+                        style = "width:100px"
+                    })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Count, new {
+                        @readonly = "readonly",
+                        style = "width:50px"
+                    })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Country)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Flag, new
+                    {
+                        @readonly = "readonly",
+                        style = "width:50px"
+                    })
+                </td>
+                <td>@Html.ActionLink("List", "PlacesInCity", new {
+                        @id = Model[i].Id
+                    })</td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Save" />
+}

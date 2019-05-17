@@ -1,0 +1,102 @@
+﻿@using System.Web.Mvc.Html
+@model List<CoffeeBot.Models.Admin.PlaceViewModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Admin";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/main.js"></script>
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<link href="~/Content/main.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+{
+    <table id="tblPlaces">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Address</th>
+            <th>Longitude</th>
+            <th>Latitude</th>
+            <th>Active</th>
+            <th>Map</th>
+            <th>Del</th>
+        </tr>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(m => m[i].Id)
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Id, new {
+                    disabled = "disabled",
+                    @readonly = "readonly",
+                    style = "width:30px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Name, new {
+                    style = "width:250px"
+                })
+                </td>
+                <td style="vertical-align: middle;">
+                    <div>  @Html.TextAreaFor(m => m[i].DescriptionRu, new {
+                               style = "width:700px",
+                               wrap = "soft"
+                           })
+                    </div>
+                    <div> @Html.TextAreaFor(m => m[i].DescriptionEn, new {
+                              style = "width:700px",
+                              wrap = "soft"
+                          })
+                        </div>
+                    <div> @Html.TextAreaFor(m => m[i].DescriptionUa, new {
+                              style = "width:700px",
+                              wrap = "soft"
+                          })
+                        </div>
+                </td>
+                <td style="vertical-align: middle;">
+                    <div>
+                        @Html.TextBoxFor(m => m[i].AddressRu, new {
+                            style = "width:250px"
+                        })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(m => m[i].AddressEn, new {
+                            style = "width:250px"
+                        })
+                    </div>
+                    <div>
+                        @Html.TextBoxFor(m => m[i].AddressUa, new {
+                            style = "width:250px"
+                        })
+                    </div>
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Longitude, new {
+                    style = "width:100px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Latitude, new {
+                        style = "width:100px"
+                    })
+                </td>
+                <td>
+                    @Html.CheckBoxFor(m => m[i].Active)
+                </td>
+                <td><a href="@($"https://www.google.com/maps/search/?api=1&query={Model[i].Latitude},{Model[i].Longitude}")" target="_blank">Map</a></td>
+                <td><a href="#" onclick="deletePlace(@Model[i].Id)">X</a></td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Save" />
+    <script>
+        $('textarea').each(function() {
+            autosize($(this)[0]);
+        });
+    </script>
+}

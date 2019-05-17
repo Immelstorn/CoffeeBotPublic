@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+    @Html.ActionLink("Admin", "Index", "Admin")
+    @Html.ActionLink("Add", "Add", "Admin")
+    @Html.ActionLink("Cities", "Cities", "Admin")
+    @Html.ActionLink("Comments", "Comments", "Admin")
+
+    @RenderBody()
+</body>
+</html>

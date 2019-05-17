@@ -1,0 +1,79 @@
+﻿@model System.Collections.Generic.List<CoffeeBot.Models.Admin.CommentViewModel>
+
+@{
+    ViewBag.Title = "Comments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/main.js"></script>
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<link href="~/Content/main.css" rel="stylesheet" />
+
+@using (Html.BeginForm("EditComments", "Admin", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Place</th>
+            <th>Stars</th>
+            <th>Comment</th>
+            <th>Review</th>
+            <th>Del</th>
+        </tr>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            @Html.HiddenFor(m => m[i].Id)
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Id, new {
+                    @readonly = "readonly",
+                    style = "width:30px"
+                })
+                </td>
+                <td>
+                    @Html.TextBox("Timestamp", Model[i].Timestamp.ToString("g"), new {
+                   @readonly = "readonly",
+                   style = "width:150px"
+               })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].User, new {
+                    @readonly = "readonly",
+                    style = "width:100px"
+                    })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Place, new {
+                    @readonly = "readonly",
+                    style = "width:150px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Stars, new {
+                    @readonly = "readonly",
+                    style = "width:30px"
+                })
+                </td>
+                <td>
+                    @Html.TextAreaFor(m => m[i].Comment, new {
+                        style = "width:700px",
+                        wrap = "soft"
+                    })
+                </td>
+                <td>@Html.CheckBoxFor(m => m[i].NeedReview)</td>
+                <td><a href="#" onclick="deleteComment(@Model[i].Id)">X</a></td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Save" />
+}
+
+<script>
+    $('textarea').each(function () {
+        autosize($(this)[0]);
+    });
+</script>

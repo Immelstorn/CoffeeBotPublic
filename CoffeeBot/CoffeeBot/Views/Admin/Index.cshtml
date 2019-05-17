@@ -1,0 +1,82 @@
+﻿@using System.Web.Mvc.Html
+@model List<CoffeeBot.Models.Admin.PlaceViewModel>
+
+    @{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Admin";
+    }
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <link href="~/Content/main.css" rel="stylesheet" />
+
+    @using (Html.BeginForm("Edit", "Admin", FormMethod.Post))
+    {
+        <table id="tblPlaces">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+                <th>Map</th>
+                <th>4sq</th>
+                <th>Google</th>
+                <th>Del</th>
+            </tr>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                @Html.HiddenFor(m => m[i].Id)
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Id, new {
+                    disabled = "disabled",
+                    @readonly = "readonly",
+                    style = "width:30px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Name, new {
+                    style = "width:250px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Description, new {
+                    style = "width:450px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Address, new {
+                    style = "width:450px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Longitude, new {
+                    style = "width:100px"
+                })
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m[i].Latitude, new {
+                    style = "width:100px"
+                })
+                </td>
+                <td><a href="@($"https://www.google.com/maps/search/?api=1&query={Model[i].Latitude},{Model[i].Longitude}")" target="_blank">Map</a></td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model[i].FoursquareId))
+                    {
+                        <a href="@($"https://ru.foursquare.com/v/{Model[i].FoursquareId}")" target="_blank">4sq</a>
+                    }
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(Model[i].GoogleId))
+                    {
+                    <a href="@($"https://www.google.com/maps/search/?api=1&query=Google&query_place_id={Model[i].GoogleId}")" target="_blank">Google</a>
+                    }
+                </td>
+                <td><a href="#" onclick="deletePlace(@Model[i].Id)">X</a></td>
+            </tr>
+            }
+        </table>
+        <input type="submit" value="Save" />
+    }
